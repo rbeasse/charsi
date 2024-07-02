@@ -1,0 +1,5 @@
+build:
+  output_dir: '_build'
+  layout_dir: 'layouts'
+  assets_dir: 'assets'
+  views_dir:  'views'

@@ -1,0 +1,32 @@
+PATH
+  remote: .
+  specs:
+    charsi (0.1.0)
+      sassc (~> 2.4)
+      terser (~> 1.1)
+      tilt (~> 2.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    execjs (2.8.1)
+    ffi (1.15.5)
+    rake (13.0.6)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    terser (1.1.16)
+      execjs (>= 0.3.0, < 3)
+    tilt (2.2.0)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  charsi!
+  rake (~> 13.0)
+  sassc (~> 2.4)
+  terser (~> 1.1)
+  tilt (~> 2.2)
+
+BUNDLED WITH
+   2.4.8
