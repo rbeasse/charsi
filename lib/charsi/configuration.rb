@@ -8,32 +8,8 @@ module Charsi
       @config ||= default_config.merge(app_config)
     end
 
-    def output_dir
-      File.join(Dir.pwd, @config['build']['output_dir'])
-    end
-
-    def views_dir
-      File.join(Dir.pwd, @config['build']['views_dir'])
-    end
-
-    def layout_dir
-      File.join(Dir.pwd, @config['build']['layout_dir'])
-    end
-
-    def assets_dir
-      File.join(Dir.pwd, @config['build']['assets_dir'])
-    end
-
-    def views_path
-      File.join(views_dir, '*.erb')
-    end
-
-    def assets_path
-      File.join(assets_dir, '**', '*.*')
-    end
-
-    def layout_path(layout_name = 'default.erb')
-      File.join(layout_dir, layout_name)
+    def paths
+      OpenStruct.new(@config['build']) 
     end
 
     private
