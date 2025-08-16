@@ -2,7 +2,7 @@ require 'erb'
 require 'fileutils'
 require 'tilt'
 require 'terser'
-require 'sassc'
+require 'tailwindcss/ruby'
 require 'yaml'
 
 module Charsi
@@ -27,7 +27,7 @@ module Charsi
       config = Configuration.new
 
       # Clean up the output directory before building.
-      Charsi::FileManagement.reset_output_dir
+      Charsi::FileManagement.reset_output_dir(config.output_dir)
 
       Charsi::Asset.new(app, config).build
       Charsi::Template.new(app, config).build

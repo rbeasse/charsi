@@ -19,9 +19,11 @@ module Charsi
       FileUtils.cp(path, destination)
     end
 
-    def self.reset_output_dir
-      FileUtils.rm_rf(OUTPUT_DIR) if Dir.exist?(OUTPUT_DIR)
-      FileUtils.mkdir_p(OUTPUT_DIR)
+    def self.reset_output_dir(output_dir)
+      puts "Resetting output directory: #{output_dir}"
+
+      FileUtils.rm_rf(output_dir) if Dir.exist?(output_dir)
+      FileUtils.mkdir_p(output_dir)
     end
   end
 end

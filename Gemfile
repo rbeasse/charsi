@@ -6,6 +6,6 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rake', '~> 13.0'
-gem 'terser', '~> 1.1'
-gem 'tilt', '~> 2.2'
-gem 'sassc', '~> 2.4'
+gem 'terser', '~> 1.2'
+gem 'tilt', '~> 2.6'
+gem 'tailwindcss-ruby', '~> 3.4'

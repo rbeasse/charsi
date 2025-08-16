@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.executables << 'charsi'
 
-  spec.add_dependency 'terser', '~> 1.1'
-  spec.add_dependency 'tilt', '~> 2.2'
-  spec.add_dependency 'sassc', '~> 2.4'
+  spec.add_dependency 'terser', '~> 1.2'
+  spec.add_dependency 'tilt', '~> 2.6'
+  spec.add_dependency 'tailwindcss-ruby', '~> 3.4'
 end

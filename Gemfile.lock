@@ -2,21 +2,19 @@ PATH
   remote: .
   specs:
     charsi (0.1.0)
-      sassc (~> 2.4)
-      terser (~> 1.1)
-      tilt (~> 2.2)
+      tailwindcss-ruby (~> 3.4)
+      terser (~> 1.2)
+      tilt (~> 2.6)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    execjs (2.8.1)
-    ffi (1.15.5)
-    rake (13.0.6)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    terser (1.1.16)
+    execjs (2.10.0)
+    rake (13.3.0)
+    tailwindcss-ruby (3.4.17-x86_64-linux)
+    terser (1.2.6)
       execjs (>= 0.3.0, < 3)
-    tilt (2.2.0)
+    tilt (2.6.1)
 
 PLATFORMS
   x86_64-linux
@@ -24,9 +22,9 @@ PLATFORMS
 DEPENDENCIES
   charsi!
   rake (~> 13.0)
-  sassc (~> 2.4)
-  terser (~> 1.1)
-  tilt (~> 2.2)
+  tailwindcss-ruby (~> 3.4)
+  terser (~> 1.2)
+  tilt (~> 2.6)
 
 BUNDLED WITH
-   2.4.8
+   2.6.9
