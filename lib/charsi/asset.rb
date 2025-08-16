@@ -9,12 +9,12 @@ module Charsi
     end
 
     def build
-      assets_path = File.join(@config.paths.assets_dir, '**', '*.*')
+      assets_path = @config.path(:assets_dir, '**', '*.*')
       
       Dir.glob(assets_path).each do |asset|
         extension        = File.extname(asset)
-        destination_dir  = File.join(@config.paths.output_dir, 'assets')
-        destination_path = asset.sub(@config.paths.assets_dir, destination_dir)
+        destination_dir  = @config.path(:output_dir, 'assets')
+        destination_path = asset.sub(@config.path(:assets_dir), destination_dir)
 
         next process_and_copy_js(asset, destination_path)  if extension == '.js'
         next process_and_copy_css(asset, destination_path) if extension == '.css'
@@ -26,11 +26,13 @@ module Charsi
     private
 
       def process_and_copy_css(asset, destination_path)
+        config_path = File.join(Dir.pwd, 'tailwind.config.js')
+
         commands  = [Tailwindcss::Ruby.executable]
-        commands += ['input', asset]
-        commands += ['output', destination_path]
+        commands += ['-i', asset]
+        commands += ['-o', destination_path]
         commands += ['--minify']
-        commands += ['--config', @config.paths.tailwind]
+        commands += ['--config', config_path]
         
         system(*commands)
       end

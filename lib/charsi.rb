@@ -27,7 +27,7 @@ module Charsi
       config = Configuration.new
 
       # Clean up the output directory before building.
-      Charsi::FileManagement.reset_output_dir(config.paths.output_dir)
+      Charsi::FileManagement.reset_output_dir(config.path(:output_dir))
 
       Charsi::Asset.new(app, config).build
       Charsi::Template.new(app, config).build

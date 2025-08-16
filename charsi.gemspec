@@ -26,5 +26,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'terser', '~> 1.2'
   spec.add_dependency 'tilt', '~> 2.6'
-  spec.add_dependency 'tailwindcss-ruby', '~> 3.4'
+  spec.add_dependency 'tailwindcss-ruby', '~> 4.1'
 end

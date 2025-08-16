@@ -8,8 +8,10 @@ module Charsi
       @config ||= default_config.merge(app_config)
     end
 
-    def paths
-      OpenStruct.new(@config['build']) 
+    def path(*keys)
+      config_path = @config.dig('paths', keys.shift.to_s)
+
+      File.join(Dir.pwd, config_path, *keys)
     end
 
     private

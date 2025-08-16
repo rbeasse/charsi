@@ -9,11 +9,11 @@ module Charsi
     end
 
     def build
-      views_path = File.join(@config.paths.views_dir, '*.erb')
+      views_path = @config.path(:views_dir, '*.erb')
       
       Dir.glob(views_path).each do |view|
         output_file = File.basename(view, '.erb') + '.html'
-        output_path = File.join(@config.paths.output_dir, output_file)
+        output_path = @config.path(:output_dir, output_file)
 
         processed_view = parse_erb_with_layout(view)
 
@@ -26,7 +26,7 @@ module Charsi
 
       # Parses an ERB file with a layout (also an ERB file).
       def parse_erb_with_layout(view_path, layout: 'default.erb')
-        layout_path = File.join(@config.paths.layout_dir, layout)
+        layout_path = @config.path(:layout_dir, layout)
 
         layout = Tilt::ERBTemplate.new(layout_path)
         view   = Tilt::ERBTemplate.new(view_path)
