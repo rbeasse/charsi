@@ -2,4 +2,20 @@
 
 require 'charsi'
 
-Charsi.build
+command = ARGV[0]
+watch_flag = ARGV.include?('--watch')
+
+if command == 'build'
+  charsi = Charsi::Builder.new
+  
+  charsi.build
+  charsi.watch if watch_flag
+elsif command == 'new'
+  project_name = ARGV[1]
+  
+  raise ArgumentError, 'Project name is required' if project_name.nil?
+
+  Charsi::Generator.generate(project_name)
+else
+  puts 'Usage: charsi build [--watch]'
+end

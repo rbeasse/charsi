@@ -1,0 +1,2 @@
+<h1><%=project_title%></h1>
+<p class="text-lg mb-4">Simple static site generator written in Ruby.</p>

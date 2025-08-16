@@ -3,8 +3,7 @@ module Charsi
   #
   # JavaScript and CSS files are minified.
   class Asset
-    def initialize(app, config)
-      @app    = app
+    def initialize(config)
       @config = config
     end
 
@@ -16,8 +15,8 @@ module Charsi
         destination_dir  = @config.path(:output_dir, 'assets')
         destination_path = asset.sub(@config.path(:assets_dir), destination_dir)
 
-        next process_and_copy_js(asset, destination_path)  if extension == '.js'
-        next process_and_copy_css(asset, destination_path) if extension == '.css'
+        next process_javascript(asset, destination_path)  if extension == '.js'
+        next process_tailwind(asset, destination_path) if asset.include?('tailwind.css')
 
         Charsi::FileManagement.copy(asset, destination_path)
       end
@@ -25,22 +24,18 @@ module Charsi
 
     private
 
-      def process_and_copy_css(asset, destination_path)
-        config_path = File.join(Dir.pwd, 'tailwind.config.js')
+    def process_tailwind(asset, destination_path)
+      commands  = [Tailwindcss::Ruby.executable]
+      commands += ['-i', asset, '-o', destination_path, '--minify']
+      commands += ['--config', 'tailwind.config.js']
 
-        commands  = [Tailwindcss::Ruby.executable]
-        commands += ['-i', asset]
-        commands += ['-o', destination_path]
-        commands += ['--minify']
-        commands += ['--config', config_path]
-        
-        system(*commands)
-      end
+      system(*commands)
+    end
 
-      def process_and_copy_js(asset, destination_path)
-        processed_asset = Terser.compile(File.read(asset))
+    def process_javascript(asset, destination_path)
+      processed_asset = Terser.compile(File.read(asset))
 
-        Charsi::FileManagement.write(destination_path, processed_asset)
-      end
+      Charsi::FileManagement.write(destination_path, processed_asset)
+    end
   end
 end

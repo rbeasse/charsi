@@ -21,17 +21,15 @@ module Charsi
       end
     end
 
-
     private
 
-      # Parses an ERB file with a layout (also an ERB file).
-      def parse_erb_with_layout(view_path, layout: 'default.erb')
-        layout_path = @config.path(:layout_dir, layout)
+    def parse_erb_with_layout(view_path, layout: 'default.erb')
+      layout_path = @config.path(:layout_dir, layout)
 
-        layout = Tilt::ERBTemplate.new(layout_path)
-        view   = Tilt::ERBTemplate.new(view_path)
+      layout = Tilt::ERBTemplate.new(layout_path)
+      view   = Tilt::ERBTemplate.new(view_path)
 
-        layout.render(@app) { view.render(@app) }
-      end
+      layout.render(@app) { view.render(@app) }
+    end
   end
 end
