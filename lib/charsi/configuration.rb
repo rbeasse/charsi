@@ -13,6 +13,7 @@ module Charsi
       File.join(Dir.pwd, config_path, *keys)
     end
 
+
     private
 
     def app_config

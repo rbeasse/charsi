@@ -12,7 +12,9 @@ module Charsi
       views_path = @config.path(:views_dir, '*.erb')
       
       Dir.glob(views_path).each do |view|
-        output_file = File.basename(view, '.erb') + '.html'
+        next if File.basename(view).start_with?('_')
+
+        output_file = determine_output_filename(view)
         output_path = @config.path(:output_dir, output_file)
 
         processed_view = parse_erb_with_layout(view)
@@ -22,6 +24,14 @@ module Charsi
     end
 
     private
+
+    def determine_output_filename(view_path)
+      basename = File.basename(view_path, '.erb')
+      
+      # If basename already has an extension, use it as-is
+      # otherwise, default to .htmli
+      basename.include?('.') ? basename : "#{basename}.html"
+    end
 
     def parse_erb_with_layout(view_path, layout: 'default.erb')
       layout_path = @config.path(:layout_dir, layout)

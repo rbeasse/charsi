@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name    = 'charsi'
-  spec.version = '0.1.0'
+  spec.version = '0.1.3'
 
   spec.authors = ['Ryan Beasse']
   spec.email   = ['me@ryanbeasse.com']
@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'tailwindcss-ruby', '~> 4.1'
   spec.add_dependency 'filewatcher', '~> 2.1'
   spec.add_dependency 'logger', '~> 1.6'
+  spec.add_dependency 'webrick', '~> 1.9'
 end

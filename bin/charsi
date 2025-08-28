@@ -16,6 +16,16 @@ elsif command == 'new'
   raise ArgumentError, 'Project name is required' if project_name.nil?
 
   Charsi::Generator.generate(project_name)
+
+elsif command == 'serve'
+  charsi = Charsi::Builder.new
+  server = Charsi::Server.new
+
+  charsi.build
+
+  Thread.new { charsi.watch } if watch_flag
+
+  server.serve
 else
   puts 'Usage: charsi build [--watch]'
 end

@@ -14,4 +14,5 @@ module Charsi
   require 'charsi/app'
   require 'charsi/builder'
   require 'charsi/generator'
+  require 'charsi/server'
 end

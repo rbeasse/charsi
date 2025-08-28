@@ -8,6 +8,9 @@ module Charsi
 
     def initialize
       @cache_slug = Time.now.to_i
+      @config = Configuration.new
+
+      load_helpers
     end
 
     protected
@@ -18,6 +21,23 @@ module Charsi
 
     def javascript_tag(asset)
       "<script src='assets/javascript/#{asset}?#{@cache_slug}'></script>"
+    end
+
+    def render_partial(partial_name, **locals)
+      partial_path = @config.path(:views_dir, "_#{partial_name}.erb")
+      template     = Tilt::ERBTemplate.new(partial_path)
+      
+      template.render(self, **locals)
+    end
+
+    private
+
+    def load_helpers
+      helpers_path = @config.path(:helpers_dir)
+
+      Dir.glob(File.join(helpers_path, '**', '*.rb')).each do |helper_file|
+        require_relative helper_file
+      end
     end
   end
 end

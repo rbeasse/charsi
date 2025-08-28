@@ -2,7 +2,7 @@ module Charsi
   # Builds the application and handles file watching for changes.
   class Builder
     def initialize
-      @app    = defined?(::App) ? ::App.new : Charsi::App.new
+      @app    = Charsi::App.new
       @config = Configuration.new
     end
 

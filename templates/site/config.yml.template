@@ -3,3 +3,4 @@ paths:
   layout_dir: 'layouts'
   assets_dir: 'assets'
   views_dir:  'views'
+  helpers_dir: 'helpers'
