@@ -1,0 +1,102 @@
+# <%= project_title %>
+
+This is a [Charsi](https://github.com/rbeasse/charsi) static site. Charsi is a simple Ruby static site generator that compiles ERB views, processes Tailwind CSS, and copies assets to a build directory.
+
+## Commands
+
+```bash
+bundle exec charsi build           # build the site to _build/
+bundle exec charsi build --watch   # build and watch for changes
+bundle exec charsi serve           # build and serve at http://localhost:8000
+bundle exec charsi serve --watch   # serve with live rebuilding on changes
+```
+
+## Project structure
+
+```
+layouts/        ERB layouts — default.erb wraps all views via yield
+views/          ERB views — each .erb file becomes an .html page
+  _partial.erb  Partials are prefixed with _ and not compiled to pages
+assets/
+  css/          CSS files — tailwind.css is processed by the Tailwind binary
+  javascript/   JS files — copied as-is to _build/assets/javascript/
+helpers/        Ruby files auto-loaded and mixed into the template context
+config.yml      Project configuration
+tailwind.config.js  Tailwind configuration — content paths are pre-configured
+_build/         Build output — do not edit, regenerated on every build
+.charsi/        Charsi cache (vendor downloads) — do not edit or commit
+```
+
+## Views and layouts
+
+Views are ERB files in `views/`. Each becomes a page at the same name:
+- `views/index.erb` → `_build/index.html`
+- `views/about.erb` → `_build/about.html`
+
+The default layout in `layouts/default.erb` wraps every view. Use `yield` where the view content should appear.
+
+Partials live in `views/` prefixed with `_` and are rendered via `render_partial`:
+
+```erb
+<%%= render_partial('header') %>
+<%%= render_partial('card', title: 'Hello', body: 'World') %>
+```
+
+Locals passed to `render_partial` are available as variables in the partial.
+
+## Coding style
+
+- Write clear, readable code — use full descriptive names, avoid shorthand or single-letter variables
+- No inline JavaScript or CSS — JS belongs in `assets/javascript/`, styles in `assets/css/`
+- Use Tailwind classes for styling whenever possible — only write custom CSS when Tailwind cannot achieve it or when explicitly asked
+- Keep views focused on structure — logic belongs in helpers or partials
+
+## Template helpers
+
+These methods are available in all views and layouts:
+
+```erb
+<%%= stylesheet_tag('tailwind.css') %>
+<%%= stylesheet_tag('tailwind.css', media: 'print') %>
+
+<%%= javascript_tag('app.js') %>
+<%%= javascript_tag('app.js', type: 'module', defer: true) %>
+<%%= javascript_tag(:stimulus) %>   <%# references a vendor library by key %>
+```
+
+## Tailwind CSS
+
+The `assets/css/tailwind.css` file is the Tailwind entry point. It is processed by the Tailwind binary and minified. Use Tailwind classes directly in ERB files — `tailwind.config.js` is already configured to scan `views/` and `layouts/`.
+
+## Vendor JS
+
+Third-party JS libraries can be declared in `config.yml` under `vendor:`. Charsi downloads them from [unpkg.com](https://unpkg.com) and caches them in `.charsi/vendor/`. They are copied to `_build/assets/vendor/` on every build.
+
+```yaml
+vendor:
+  stimulus: "@hotwired/stimulus/dist/stimulus.js"
+  alpine:   "alpinejs/dist/cdn.js"
+```
+
+Reference them in templates with a symbol:
+
+```erb
+<%%= javascript_tag(:stimulus, type: 'module') %>
+```
+
+## Custom helpers
+
+Any `.rb` file in `helpers/` is automatically required and its methods become available in all views and layouts. Define helper methods as module-level methods:
+
+```ruby
+# helpers/format_helper.rb
+def format_date(date)
+  date.strftime('%B %d, %Y')
+end
+```
+
+Then use them directly in ERB:
+
+```erb
+<%%= format_date(Time.now) %>
+```
