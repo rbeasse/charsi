@@ -19,7 +19,7 @@ module Charsi
     def app_config
       app_config_path = File.join(Dir.pwd, CONFIG_FILE)
 
-      YAML.load_file(app_config_path)
+      YAML.safe_load_file(app_config_path)
     end
   end
 end

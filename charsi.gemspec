@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name    = 'charsi'
-  spec.version = '0.1.3'
+  spec.version = '0.1.4'
 
   spec.authors = ['Ryan Beasse']
   spec.email   = ['me@ryanbeasse.com']
@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://github.com/rbeasse/charsi'
   spec.license  = 'MIT'
 
-  spec.required_ruby_version = '>= 3.0.0'
+  spec.required_ruby_version = '>= 3.2.0'
 
   spec.metadata['homepage_uri']    = spec.homepage
   spec.metadata['source_code_uri'] = spec.homepage
@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'terser', '~> 1.2'
   spec.add_dependency 'tilt', '~> 2.6'
   spec.add_dependency 'tailwindcss-ruby', '~> 4.1'
-  spec.add_dependency 'filewatcher', '~> 2.1'
+  spec.add_dependency 'filewatcher', '~> 3.0'
   spec.add_dependency 'logger', '~> 1.6'
   spec.add_dependency 'webrick', '~> 1.9'
 end
