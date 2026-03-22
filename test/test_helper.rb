@@ -1,0 +1,5 @@
+require 'minitest/autorun'
+require 'fileutils'
+require 'tmpdir'
+require 'json'
+require_relative '../lib/charsi'

@@ -5,7 +5,7 @@ module Charsi
       templates_dir  = File.join(__dir__, '../../templates', template)
       templates_glob = File.join(templates_dir, '**', '*.template')
 
-      Dir.glob(templates_glob).each do |template|
+      Dir.glob(templates_glob, File::FNM_DOTMATCH).each do |template|
         output_path = template.delete_prefix(templates_dir)
         output_path = output_path.delete_suffix('.template')
         output_path = File.join(Dir.pwd, project, output_path)

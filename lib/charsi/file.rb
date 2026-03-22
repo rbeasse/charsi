@@ -19,5 +19,15 @@ module Charsi
       FileUtils.rm_rf(output_dir) if Dir.exist?(output_dir)
       FileUtils.mkdir_p(output_dir)
     end
+
+    def self.download(url, destination)
+      write(destination, URI.open(url, &:read)) # rubocop:disable Security/Open
+    rescue OpenURI::HTTPError => error
+      raise "[charsi] Failed to download #{url} — #{error.message}"
+    end
+
+    def self.cached(path)
+      File.exist?(path) ? path : yield(path)
+    end
   end
 end

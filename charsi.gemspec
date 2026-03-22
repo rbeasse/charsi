@@ -18,16 +18,17 @@ Gem::Specification.new do |spec|
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
   spec.files = Dir.chdir(__dir__) do
     `git ls-files -z`.split("\x0").reject do |f|
-      (File.expand_path(f) == __FILE__) || f.start_with?(*%w[bin/ test/ spec/ features/ .git .circleci appveyor .devcontainer])
+      (File.expand_path(f) == __FILE__) || f.start_with?(*%w[test/ .git .github .devcontainer])
     end
   end
 
   spec.executables << 'charsi'
 
-  spec.add_dependency 'terser', '~> 1.2'
   spec.add_dependency 'tilt', '~> 2.6'
   spec.add_dependency 'tailwindcss-ruby', '~> 4.1'
   spec.add_dependency 'filewatcher', '~> 3.0'
   spec.add_dependency 'logger', '~> 1.6'
   spec.add_dependency 'webrick', '~> 1.9'
+
+  spec.add_development_dependency 'minitest', '~> 5.0'
 end

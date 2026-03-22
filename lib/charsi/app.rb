@@ -15,12 +15,12 @@ module Charsi
 
     protected
 
-    def stylesheet_tag(asset)
-      "<link rel='stylesheet' href='assets/css/#{asset}?#{@cache_slug}'>"
+    def stylesheet_tag(asset, **attributes)
+      "<link rel='stylesheet' href='assets/css/#{asset}?#{@cache_slug}'#{html_attributes(attributes)}>"
     end
 
-    def javascript_tag(asset)
-      "<script src='assets/javascript/#{asset}?#{@cache_slug}'></script>"
+    def javascript_tag(asset, **attributes)
+      "<script src='#{javascript_src(asset)}'#{html_attributes(attributes)}></script>"
     end
 
     def render_partial(partial_name, **locals)
@@ -31,6 +31,18 @@ module Charsi
     end
 
     private
+
+    def javascript_src(asset)
+      if asset.is_a?(Symbol)
+        "assets/vendor/#{asset}.js?#{@cache_slug}"
+      else
+        "assets/javascript/#{asset}?#{@cache_slug}"
+      end
+    end
+
+    def html_attributes(attributes)
+      attributes.map { |attribute, value| " #{attribute}='#{value}'" }.join
+    end
 
     def load_helpers
       helpers_path = @config.path(:helpers_dir)

@@ -1,7 +1,7 @@
 require 'erb'
 require 'fileutils'
+require 'open-uri'
 require 'tilt'
-require 'terser'
 require 'tailwindcss/ruby'
 require 'yaml'
 require 'filewatcher'

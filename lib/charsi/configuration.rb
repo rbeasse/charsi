@@ -13,6 +13,10 @@ module Charsi
       File.join(Dir.pwd, config_path, *keys)
     end
 
+    def vendor
+      @config.fetch('vendor', {})
+    end
+
 
     private
 
