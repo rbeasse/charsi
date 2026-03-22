@@ -1,0 +1,12 @@
+{
+  "name": "charsi",
+  "image": "mcr.microsoft.com/devcontainers/ruby:4",
+  "postCreateCommand": "bundle install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "shopify.ruby-lsp"
+      ]
+    }
+  }
+}
