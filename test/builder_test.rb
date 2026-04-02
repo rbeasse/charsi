@@ -18,6 +18,18 @@ class BuilderTest < Minitest::Test
     end
   end
 
+  def test_non_html_erb_renders_without_layout
+    build_from_fixture('simple') do
+      Charsi::Builder.new.build
+
+      assert File.exist?('_build/feed.xml')
+
+      xml = File.read('_build/feed.xml')
+      assert_includes xml, '<title>Simple Feed</title>'
+      refute_includes xml, '<!DOCTYPE html>'
+    end
+  end
+
   def test_vendor_build_downloads_and_copies_vendor_js
     build_from_fixture('with_vendor') do
       downloaded_urls = stub_downloads { Charsi::Builder.new.build }

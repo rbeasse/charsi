@@ -17,7 +17,11 @@ module Charsi
         output_file = determine_output_filename(view)
         output_path = @config.path(:output_dir, output_file)
 
-        processed_view = parse_erb_with_layout(view)
+        processed_view = if html?(output_file)
+          parse_erb_with_layout(view)
+        else
+          parse_erb(view)
+        end
 
         Charsi::FileManagement.write(output_path, processed_view)
       end
@@ -31,6 +35,14 @@ module Charsi
       # If basename already has an extension, use it as-is
       # otherwise, default to .htmli
       basename.include?('.') ? basename : "#{basename}.html"
+    end
+
+    def html?(filename)
+      File.extname(filename) == '.html'
+    end
+
+    def parse_erb(view_path)
+      Tilt::ERBTemplate.new(view_path).render(@app)
     end
 
     def parse_erb_with_layout(view_path, layout: 'default.erb')

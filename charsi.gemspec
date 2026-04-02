@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name    = 'charsi'
-  spec.version = '0.1.5'
+  spec.version = '0.1.6'
 
   spec.authors = ['Ryan Beasse']
   spec.email   = ['me@ryanbeasse.com']
@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
   spec.files = Dir.chdir(__dir__) do
     `git ls-files -z`.split("\x0").reject do |f|
-      (File.expand_path(f) == __FILE__) || f.start_with?(*%w[test/ .git .github .devcontainer])
+      (File.expand_path(f) == __FILE__) || f.start_with?(*%w[test/ .git .github])
     end
   end
 
